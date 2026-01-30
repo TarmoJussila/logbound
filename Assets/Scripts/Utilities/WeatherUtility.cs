@@ -1,7 +1,30 @@
+using Logbound.Data;
+
 namespace Logbound.Utilities
 {
     public static class WeatherUtility
     {
+        public enum WeatherTimeState
+        {
+            Previous = -1,
+            Current = 0,
+            Next = 1
+        }
+        
+        public static float MinTemperatureCelsius = -50f;
+        public static float MaxTemperatureCelsius = 10f;
+        
+        public static float GetRandomTemperatureCelsius()
+        {
+            return UnityEngine.Random.Range(MinTemperatureCelsius, MaxTemperatureCelsius);
+        }
+        
+        public static WeatherState GetRandomWeatherState()
+        {
+            var values = System.Enum.GetValues(typeof(WeatherState));
+            return (WeatherState)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        }
+        
         public static float GetTemperature(float temperature, bool inCelsius = true)
         {
             if (inCelsius)
