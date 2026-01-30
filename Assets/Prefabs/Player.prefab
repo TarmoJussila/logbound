@@ -83,10 +83,10 @@ MonoBehaviour:
   _lookSpeed: 100
   _walkSpeed: 13.4
   _runSpeed: 1.5
-  _airtimeThreshold: 0
+  _airtimeThreshold: 0.1
   _terminalVelocity: 0
-  _jumpVelocity: 0
-  _gravity: 0
+  _jumpVelocity: 2.97
+  _gravity: -1
 --- !u!143 &5880653601542522976
 CharacterController:
   m_ObjectHideFlags: 0
