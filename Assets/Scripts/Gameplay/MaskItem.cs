@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logbound
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public abstract class CarryableItem : InteractableItem
+    public class MaskItem : InteractableItem
     {
         private Rigidbody _rb;
         private Collider[] _colliders;
 
-        private PlayerInteraction beingCarriedBy;
+        public PlayerInteraction BeingWornBy { get; private set; }
 
         private void Awake()
         {
@@ -18,7 +18,14 @@ namespace Logbound
             _colliders = GetComponentsInChildren<Collider>();
         }
 
-        public void StartCarry(PlayerInteraction playerInteraction)
+        public override void Interact(PlayerInteraction playerInteraction)
+        {
+            playerInteraction.GetComponent<PlayerMaskHelper>().WearMask(this);
+            
+            StartWearing(playerInteraction);
+        }
+
+        public void StartWearing(PlayerInteraction playerInteraction)
         {
             _rb.isKinematic = true;
 
@@ -27,9 +34,7 @@ namespace Logbound
                 col.enabled = false;
             }
 
-            beingCarriedBy = playerInteraction;
-
-            OnStartCarry();
+            BeingWornBy = playerInteraction;
         }
 
         public void StopCarry()
@@ -41,13 +46,19 @@ namespace Logbound
                 col.enabled = true;
             }
 
-            beingCarriedBy = null;
-
-            OnStopCarry();
+            BeingWornBy = null;
         }
+    }
 
-        protected abstract void OnStartCarry();
-
-        protected abstract void OnStopCarry();
+    public enum MaskType
+    {
+        GAS,
+        WELDING,
+        SKIMASK,
+        COVID,
+        AIRSOFT,
+        PROTECTIVE,
+        SKINCARE,
+        SLEEPING
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,6 @@ namespace Logbound.Gameplay
     {
         private Transform _cameraTransform;
         private CharacterController _characterController;
-        private PlayerInput _playerInput;
 
         private float _currentStamina;
         [SerializeField] private float _maxStamina;
@@ -28,8 +26,8 @@ namespace Logbound.Gameplay
         [SerializeField] private float _jumpVelocity;
         [SerializeField] private float _gravity;
 
-        public bool IsSprinting { get; private set; }
-        
+        [SerializeField] private Canvas _playerCanvas;
+
         private Vector2 _moveInput;
         private Vector2 _lookInput;
 
@@ -37,12 +35,6 @@ namespace Logbound.Gameplay
         {
             _cameraTransform = GetComponentInChildren<Camera>().transform;
             _characterController = GetComponentInChildren<CharacterController>();
-            _playerInput = GetComponentInChildren<PlayerInput>();
-        }
-
-        private void OnSprintInput()
-        {
-            throw new NotImplementedException();
         }
 
         private void Update()
@@ -146,19 +138,46 @@ namespace Logbound.Gameplay
             }
         }
 
-        private void OnJumpInput()
-        {
-            _jumpBuffer = _jumpBufferLength;
-        }
-
         private void OnMove(InputValue value)
         {
             _moveInput = value.Get<Vector2>();
         }
-        
+
         private void OnLook(InputValue value)
         {
             _lookInput = value.Get<Vector2>();
+        }
+
+        private void OnJump(InputValue value)
+        {
+            Debug.Log("Jump");
+            if (value.isPressed)
+            {
+                _jumpBuffer = _jumpBufferLength;
+            }
+        }
+
+        private void OnInteract(InputValue value)
+        {
+            Debug.Log("Interact");
+            if (value.isPressed)
+            {
+                _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+            }
+        }
+
+        private void OnAttack(InputValue value)
+        {
+            Debug.Log("Attack");
+        }
+
+        private void OnPause(InputValue value)
+        {
+            Debug.Log("Pause");
+            if (value.isPressed)
+            {
+                _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+            }
         }
     }
 }
