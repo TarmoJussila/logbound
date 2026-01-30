@@ -7,67 +7,38 @@ namespace Logbound.Services
 {
     public class WeatherService : Singleton<WeatherService>
     {
-        public event Action<float> OnTemperatureChanged;
-        public event Action<WeatherState> OnWeatherChanged;
+        public event Action<WeatherState> OnTargetWeatherStateChanged;
+        public event Action<float> OnTargetTemperatureChanged;
 
-        private float _currentTemperature;
-        private WeatherState _currentWeatherState;
+        private WeatherState _targetWeatherState;
+        private float _targetTemperature;
 
-        public void SetWeatherState(WeatherState state)
+        public void SetTargetWeatherState(WeatherState state)
         {
-            if (_currentWeatherState != state)
+            if (_targetWeatherState != state)
             {
-                _currentWeatherState = state;
-                OnWeatherChanged?.Invoke(state);
+                _targetWeatherState = state;
+                OnTargetWeatherStateChanged?.Invoke(state);
             }
         }
 
-        public WeatherState GetWeatherState()
+        public WeatherState GetTargetWeatherState()
         {
-            return _currentWeatherState;
+            return _targetWeatherState;
         }
 
-        public void SetTemperature(float temperature)
+        public void SetTargetTemperature(float temperature)
         {
-            if (!Mathf.Approximately(temperature, _currentTemperature))
+            if (!Mathf.Approximately(temperature, _targetTemperature))
             {
-                _currentTemperature = temperature;
-                OnTemperatureChanged?.Invoke(temperature);
+                _targetTemperature = temperature;
+                OnTargetTemperatureChanged?.Invoke(temperature);
             }
         }
         
-        public float GetTemperature(bool inCelsius = true)
+        public float GetTargetTemperature(bool inCelsius = true)
         {
-            if (inCelsius)
-            {
-                return _currentTemperature;
-            }
-            else
-            {
-                return (_currentTemperature * 9 / 5) + 32;
-            }
-        }
-        
-        public string GetTemperatureString(bool inCelsius = true)
-        {
-            if (inCelsius)
-            {
-                return GetTemperatureCelsiusString();
-            }
-            else
-            {
-                return GetTemperatureFahrenheitString();
-            }
-        }
-        
-        private string GetTemperatureCelsiusString()
-        {
-            return $"{GetTemperature(true)} °C";
-        }
-        
-        private string GetTemperatureFahrenheitString()
-        {
-            return $"{GetTemperature(false)} °F";
+            return WeatherUtility.GetTemperature(_targetTemperature, inCelsius);
         }
     }
 }

@@ -20,19 +20,20 @@ namespace Logbound.Gameplay
 
         private void Awake()
         {
-            _initialWeatherState = WeatherService.Instance.GetWeatherState();
+            _initialWeatherState = WeatherService.Instance.GetTargetWeatherState();
+            _initialTemperature = WeatherService.Instance.GetTargetTemperature();
         }
 
         private void OnEnable()
         {
-            WeatherService.Instance.OnTemperatureChanged += StartTemperatureTransition;
-            WeatherService.Instance.OnWeatherChanged += StartWeatherTransition;
+            WeatherService.Instance.OnTargetWeatherStateChanged += StartTargetWeatherStateTransition;
+            WeatherService.Instance.OnTargetTemperatureChanged += StartTargetTemperatureTransition;
         }
 
         private void OnDestroy()
         {
-            WeatherService.Instance.OnTemperatureChanged -= StartTemperatureTransition;
-            WeatherService.Instance.OnWeatherChanged -= StartWeatherTransition;
+            WeatherService.Instance.OnTargetWeatherStateChanged -= StartTargetWeatherStateTransition;
+            WeatherService.Instance.OnTargetTemperatureChanged -= StartTargetTemperatureTransition;
         }
 
         private void Update()
@@ -64,7 +65,7 @@ namespace Logbound.Gameplay
             }
         }
         
-        private void StartWeatherTransition(WeatherState weatherState)
+        private void StartTargetWeatherStateTransition(WeatherState weatherState)
         {
             _targetWeatherState = weatherState;
             if (_initialWeatherState == _targetWeatherState)
@@ -77,7 +78,7 @@ namespace Logbound.Gameplay
             _transitionProgressWeather = 0f;
         }
         
-        private void StartTemperatureTransition(float newTemperature)
+        private void StartTargetTemperatureTransition(float newTemperature)
         {
             _targetTemperature = newTemperature;
             if (Mathf.Approximately(_initialTemperature, _targetTemperature))
@@ -88,6 +89,23 @@ namespace Logbound.Gameplay
             
             _isTransitioningTemperature = true;
             _transitionProgressTemperature = 0f;
+        }
+        
+        public float GetCurrentTemperature()
+        {
+            return Mathf.Lerp(_initialTemperature, _targetTemperature, _transitionProgressTemperature);
+        }
+        
+        public WeatherState GetCurrentWeatherState()
+        {
+            if (_transitionProgressWeather >= 1f)
+            {
+                return _targetWeatherState;
+            }
+            else
+            {
+                return _initialWeatherState;
+            }
         }
     }
 }
