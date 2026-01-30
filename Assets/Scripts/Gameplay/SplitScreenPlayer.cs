@@ -26,6 +26,8 @@ namespace Logbound.Gameplay
         [SerializeField] private float _jumpVelocity;
         [SerializeField] private float _gravity;
 
+        [SerializeField] private Canvas _playerCanvas;
+
         private Vector2 _moveInput;
         private Vector2 _lookInput;
 
@@ -158,6 +160,10 @@ namespace Logbound.Gameplay
         private void OnInteract(InputValue value)
         {
             Debug.Log("Interact");
+            if (value.isPressed)
+            {
+                _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+            }
         }
 
         private void OnAttack(InputValue value)
@@ -168,7 +174,10 @@ namespace Logbound.Gameplay
         private void OnPause(InputValue value)
         {
             Debug.Log("Pause");
-            
+            if (value.isPressed)
+            {
+                _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+            }
         }
     }
 }
