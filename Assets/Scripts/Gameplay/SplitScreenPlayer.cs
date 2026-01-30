@@ -164,5 +164,11 @@ namespace Logbound.Gameplay
         {
             Debug.Log("Attack");
         }
+
+        private void OnPause(InputValue value)
+        {
+            Debug.Log("Pause");
+            
+        }
     }
 }
