@@ -1,10 +1,11 @@
 using Logbound.Data;
 using Logbound.Services;
+using Logbound.Utilities;
 using UnityEngine;
 
 namespace Logbound.Gameplay
 {
-    public class WeatherTransitionController : MonoBehaviour
+    public class WeatherTransitionController : Singleton<WeatherTransitionController>
     {
         [SerializeField] private WeatherState _targetWeatherState;
         [SerializeField] private float _targetTemperature;

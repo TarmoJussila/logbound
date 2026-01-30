@@ -28,12 +28,12 @@ namespace Logbound.Utilities
         
         private static string GetTemperatureCelsiusString(float temperature)
         {
-            return $"{GetTemperature(temperature, true)} °C";
+            return $"{GetTemperature(temperature, true)}°C";
         }
         
         private static string GetTemperatureFahrenheitString(float temperature)
         {
-            return $"{GetTemperature(temperature, false)} °F";
+            return $"{GetTemperature(temperature, false)}°F";
         }
     }
 }
