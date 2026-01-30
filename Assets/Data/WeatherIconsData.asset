@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9930dc3577e94a379dfe4d3d7ac547c7, type: 3}
   m_Name: WeatherIconsData
   m_EditorClassIdentifier: Assembly-CSharp::Logbound.Data.WeatherIconsData
-  _weatherIcons: []
+  _weatherIcons:
+  - _weatherState: 0
+    _icon: {fileID: 372804809, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
+  - _weatherState: 1
+    _icon: {fileID: -769142660, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
+  - _weatherState: 2
+    _icon: {fileID: -1027185590, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
+  - _weatherState: 3
+    _icon: {fileID: 1399408585, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
+  - _weatherState: 4
+    _icon: {fileID: -2054698026, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
+  - _weatherState: 5
+    _icon: {fileID: 658589116, guid: f04119bd978b34a4fa1129af2a6e06ab, type: 3}
