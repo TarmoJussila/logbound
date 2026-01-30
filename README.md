@@ -1,6 +1,6 @@
-# GGJ26
+# LOGBOUND
 
-**GGJ26* is lorep ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Lorem ipsum.
+**Logbound* is lorep ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Lorem ipsum.
 
 The game was created in 48 hours during the Global Game Jam / Finnish Game Jam 2026.
 
@@ -26,7 +26,7 @@ The game was created with **Unity 6000.3.6f1**.
 | ---------------- |:-------------:|
 | N/A              | N/A           |
 
-# Credits - Team Name
+# Credits - Team Too Many Hats
 
 N/A - N/A
 
