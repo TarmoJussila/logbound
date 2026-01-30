@@ -14,7 +14,7 @@ Executable: [**Download**](https://)
 
 # Build
 
-The game was created with **Unity 6000.3.3f1**.
+The game was created with **Unity 6000.3.6f1**.
 
  1. Install Unity
  2. Clone this repository
