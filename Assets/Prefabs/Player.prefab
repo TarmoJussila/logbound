@@ -578,6 +578,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 6042362197992506124}
+    - target: {fileID: 8219418475895402300, guid: a0b3d67a9df8a4026a3cdc027517fa37, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9159310303656884256, guid: a0b3d67a9df8a4026a3cdc027517fa37, type: 3}
       propertyPath: m_Layer
       value: 8
