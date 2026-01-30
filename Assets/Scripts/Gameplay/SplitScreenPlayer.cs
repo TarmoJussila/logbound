@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class SplitScreenPlayer : MonoBehaviour
     {
