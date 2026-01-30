@@ -1,3 +1,4 @@
+using System;
 using Logbound.Data;
 using Logbound.Utilities;
 using UnityEngine;
@@ -12,8 +13,20 @@ namespace Logbound.Gameplay
         [SerializeField] private Image _weatherIcon;
         [SerializeField] private bool _displayInCelsius = true;
         
+        private bool _isInitialized = false;
+
+        private void Start()
+        {
+            _isInitialized = WeatherTransitionController.Instance != null;
+        }
+
         private void Update()
         {
+            if (!_isInitialized)
+            {
+                return;
+            }
+            
             WeatherState currentWeatherState = WeatherTransitionController.Instance.GetCurrentWeatherState();
             float currentTemperature = WeatherTransitionController.Instance.GetCurrentTemperature();
 
