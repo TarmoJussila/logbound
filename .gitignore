@@ -129,3 +129,6 @@ settings.json
 
 # Other
 .vsconfig
+
+# JetBrains Rider
+.idea
