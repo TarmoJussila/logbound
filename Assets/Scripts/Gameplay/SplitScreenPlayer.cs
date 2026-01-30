@@ -3,10 +3,12 @@ using UnityEngine.InputSystem;
 
 namespace Logbound.Gameplay
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class SplitScreenPlayer : MonoBehaviour
     {
         private Transform _cameraTransform;
         private CharacterController _characterController;
+        private PlayerInput _playerInput;
 
         private float _currentStamina;
         [SerializeField] private float _maxStamina;
@@ -16,6 +18,7 @@ namespace Logbound.Gameplay
 
         private float _verticalVelocity;
         [SerializeField] private float _lookSpeed = 1f;
+        [SerializeField] private float _mouseSensitivity = 0.5f;
         [SerializeField] private float _walkSpeed = 1f;
         [SerializeField] private float _runSpeed = 1.5f;
 
@@ -31,10 +34,13 @@ namespace Logbound.Gameplay
         private Vector2 _moveInput;
         private Vector2 _lookInput;
 
+        private bool MouseInput => _playerInput.currentControlScheme.Equals("Keyboard&Mouse");
+
         private void Awake()
         {
             _cameraTransform = GetComponentInChildren<Camera>().transform;
             _characterController = GetComponentInChildren<CharacterController>();
+            _playerInput = GetComponent<PlayerInput>();
         }
 
         private void Update()
@@ -146,6 +152,11 @@ namespace Logbound.Gameplay
         private void OnLook(InputValue value)
         {
             _lookInput = value.Get<Vector2>();
+            if (MouseInput)
+            {
+                _lookInput.x *= _mouseSensitivity;
+                _lookInput.y *= _mouseSensitivity;
+            }
         }
 
         private void OnJump(InputValue value)

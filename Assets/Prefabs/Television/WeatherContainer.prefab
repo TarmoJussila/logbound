@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3758d5a2c341ef14a80ce563544297a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Logbound.Gameplay.WeatherDisplay
+  _weatherIconsData: {fileID: 11400000, guid: 3be341acd57aaee4eb57cc60715502d6, type: 2}
   _weatherStateText: {fileID: 8861505319881092684}
   _temperatureText: {fileID: 1174316758610108755}
   _weatherIcon: {fileID: 7684672950445977815}
