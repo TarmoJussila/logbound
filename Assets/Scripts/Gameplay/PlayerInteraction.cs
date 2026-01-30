@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Logbound
@@ -20,6 +21,22 @@ namespace Logbound
 
         public CarryableItem CurrentCarryItem { get; private set; }
 
+        private void OnInteract(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                InteractPressed();
+            }
+        }
+
+        private void OnAttack(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                DropPressed();
+            }
+        }
+        
         public void InteractPressed()
         {
             if (LastFoundInteractable == null)
@@ -49,6 +66,7 @@ namespace Logbound
                 return;
             }
             
+            CurrentCarryItem.transform.SetParent(null);
             CurrentCarryItem.StopCarry();
             CurrentCarryItem = null;
         }
@@ -66,6 +84,8 @@ namespace Logbound
 
         private void ScanInteractables()
         {
+            Debug.DrawLine(_cameraTransform.position, _cameraTransform.position + _cameraTransform.forward *_interactRange);
+            
             if (!Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _interactRange, _interactLayerMask))
             {
                 InvokeInteractableLost();

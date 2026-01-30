@@ -19,8 +19,9 @@ namespace Logbound.Gameplay
         private bool _isTransitioningWeather;
         private bool _isTransitioningTemperature;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _initialWeatherState = WeatherService.Instance.GetTargetWeatherState();
             _initialTemperature = WeatherService.Instance.GetTargetTemperature();
         }

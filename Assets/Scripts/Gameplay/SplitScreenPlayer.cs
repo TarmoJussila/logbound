@@ -187,7 +187,9 @@ namespace Logbound.Gameplay
             Debug.Log("Pause");
             if (value.isPressed)
             {
-                _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+                var pauseMenuWasActive = _playerCanvas.gameObject.activeSelf;
+                _playerCanvas.gameObject.SetActive(!pauseMenuWasActive);
+                _playerInput.SwitchCurrentActionMap(pauseMenuWasActive ? "Player" : "UI");
             }
         }
     }

@@ -5,7 +5,7 @@ namespace Logbound
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public abstract class CarryableItem : InteractableItem
+    public class CarryableItem : InteractableItem
     {
         private Rigidbody _rb;
         private Collider[] _colliders;
@@ -46,8 +46,13 @@ namespace Logbound
             OnStopCarry();
         }
 
-        protected abstract void OnStartCarry();
+        protected virtual void OnStartCarry() { }
 
-        protected abstract void OnStopCarry();
+        protected virtual void OnStopCarry() { }
+
+        public override void Interact(PlayerInteraction playerInteraction)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

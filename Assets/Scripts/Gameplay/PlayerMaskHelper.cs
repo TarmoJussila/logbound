@@ -6,9 +6,9 @@ namespace Logbound
     {
         [SerializeField] private Transform _maskRoot;
         
-        public MaskItem CurrentMask { get; private set; }
+        public BasicMaskItem CurrentMask { get; private set; }
         
-        public void WearMask(MaskItem maskItem)
+        public void WearMask(BasicMaskItem maskItem)
         {
             maskItem.transform.SetParent(_maskRoot);
             maskItem.transform.localPosition = Vector3.zero;
