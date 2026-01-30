@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Logbound
 {
@@ -15,18 +16,18 @@ namespace Logbound
 
         private float _scanTimer;
 
-        private InteractableItem _lastFoundInteractable;
+        public InteractableItem LastFoundInteractable { get; private set; }
 
         public CarryableItem CurrentCarryItem { get; private set; }
 
         public void InteractPressed()
         {
-            if (_lastFoundInteractable == null)
+            if (LastFoundInteractable == null)
             {
                 return;
             }
 
-            if (_lastFoundInteractable is CarryableItem carryable)
+            if (LastFoundInteractable is CarryableItem carryable)
             {
                 CurrentCarryItem = carryable;
                 CurrentCarryItem.StartCarry(this);
@@ -36,7 +37,7 @@ namespace Logbound
             }
             else
             {
-                _lastFoundInteractable.Interact();
+                LastFoundInteractable.Interact(this);
             }
 
         }
@@ -77,16 +78,16 @@ namespace Logbound
                 return;
             }
 
-            _lastFoundInteractable = item;
+            LastFoundInteractable = item;
             
             OnPlayerInteractableFound?.Invoke(this, item);
         }
 
         private void InvokeInteractableLost()
         {
-            if (_lastFoundInteractable != null)
+            if (LastFoundInteractable != null)
             {
-                _lastFoundInteractable = null;
+                LastFoundInteractable = null;
                 OnPlayerInteractableFound?.Invoke(this, null);
             }
         }
