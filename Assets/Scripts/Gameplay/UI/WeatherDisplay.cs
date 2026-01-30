@@ -4,7 +4,7 @@ using Logbound.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Logbound.Gameplay
+namespace Logbound.Gameplay.UI
 {
     public class WeatherDisplay : MonoBehaviour
     {

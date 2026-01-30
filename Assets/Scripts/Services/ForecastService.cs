@@ -1,10 +1,13 @@
 using Logbound.Data;
 using Logbound.Utilities;
+using UnityEngine;
 
 namespace Logbound.Services
 {
     public class ForecastService : Singleton<ForecastService>
     {
+        [SerializeField] private float _forecastIntervalDuration = 60f;
+        
         private WeatherState _previousTargetState;
         private WeatherState _currentTargetState;
         private WeatherState _nextTargetState;
@@ -12,6 +15,8 @@ namespace Logbound.Services
         private float _previousTargetTemperature;
         private float _currentTargetTemperature;
         private float _nextTargetTemperature;
+        
+        private float _forecastTimer;
 
         protected override void Awake()
         {
@@ -25,6 +30,16 @@ namespace Logbound.Services
                 WeatherUtility.GetRandomTemperatureCelsius(),
                 WeatherUtility.GetRandomTemperatureCelsius()
             );
+        }
+
+        private void Update()
+        {
+            _forecastTimer += Time.deltaTime;
+            if (_forecastTimer >= _forecastIntervalDuration)
+            {
+                _forecastTimer = 0f;
+                UpdateForecast(WeatherUtility.GetRandomWeatherState(), WeatherUtility.GetRandomTemperatureCelsius());
+            }
         }
 
         private void InitializeForecast(WeatherState previousState, WeatherState currentState, WeatherState nextState,
@@ -70,6 +85,11 @@ namespace Logbound.Services
                 WeatherUtility.WeatherTimeState.Next => _nextTargetTemperature,
                 _ => _currentTargetTemperature
             };
+        }
+        
+        public float GetForecastProgress()
+        {
+            return _forecastTimer / _forecastIntervalDuration;
         }
     }
 }
