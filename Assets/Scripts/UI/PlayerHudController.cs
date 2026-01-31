@@ -2,6 +2,7 @@ using System.Collections;
 using Logbound.Gameplay;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Logbound.UI
@@ -18,6 +19,7 @@ namespace Logbound.UI
 
         [SerializeField] private GameObject _aliveElements;
         [SerializeField] private GameObject _deadElements;
+        [SerializeField] private TextMeshProUGUI _holdToQuitText;
 
         [SerializeField] private Image _healthBarFast;
         [SerializeField] private Image _healthBarSlow;
@@ -41,6 +43,24 @@ namespace Logbound.UI
             _playerDamage.OnPlayerResurrect += OnPlayerResurrect;
 
             SetPlayerAlive(true);
+        }
+
+        private void Update()
+        {
+            if (Player.CrouchHoldTimeRemaining < double.MaxValue)
+            {
+                _holdToQuitText.gameObject.SetActive(true);
+                _holdToQuitText.text = $"HOLD TO QUIT: {Player.CrouchHoldTimeRemaining:F2}s";
+
+                if (Player.CrouchHoldTimeRemaining <= 0d)
+                {
+                    SceneManager.LoadScene("MainMenuScene");
+                }
+            }
+            else
+            {
+                _holdToQuitText.gameObject.SetActive(false);
+            }
         }
 
         private void OnPlayerResurrect()

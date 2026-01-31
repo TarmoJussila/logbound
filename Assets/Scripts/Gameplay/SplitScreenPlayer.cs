@@ -10,7 +10,7 @@ namespace Logbound.Gameplay
     [RequireComponent(typeof(PlayerInput))]
     public class SplitScreenPlayer : MonoBehaviour
     {
-        public const float HoldCrouchToQuitThreshold = 3f;
+        private const float HoldCrouchToQuitThreshold = 3f;
 
         /// <summary>UI navigation only allows one input method at a time.</summary>ß
         private static int _pauseMenuLockIndex = -1;
@@ -47,7 +47,7 @@ namespace Logbound.Gameplay
         public bool MouseInput => _playerInput.currentControlScheme.Equals("Keyboard&Mouse");
         public bool HoldingCrouch => _crouchButtonLastPressed < DateTime.MaxValue;
         public double CrouchHeldTime => HoldingCrouch ? (DateTime.UtcNow - _crouchButtonLastPressed).TotalSeconds : -1d;
-        public double CrouchHoldTimeRemaining => HoldingCrouch ? HoldCrouchToQuitThreshold - CrouchHeldTime : -1d;
+        public double CrouchHoldTimeRemaining => HoldingCrouch ? HoldCrouchToQuitThreshold - CrouchHeldTime : double.MaxValue;
 
         private void Awake()
         {
@@ -199,13 +199,7 @@ namespace Logbound.Gameplay
             }
             else
             {
-                var held = CrouchHeldTime;
-                Debug.Log($"Crouch was held for '{held}' seconds");
                 _crouchButtonLastPressed = DateTime.MaxValue;
-                if (held >= HoldCrouchToQuitThreshold)
-                {
-                    SceneManager.LoadScene("MainMenuScene");
-                }
             }
         }
 
