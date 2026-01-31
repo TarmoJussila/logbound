@@ -80,7 +80,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5287634390556870174, guid: cdbf5b26a7232454bb2e9aa4258eaa86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 5287634390556870174, guid: cdbf5b26a7232454bb2e9aa4258eaa86, type: 3}
       propertyPath: m_LocalPosition.y
@@ -88,7 +88,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5287634390556870174, guid: cdbf5b26a7232454bb2e9aa4258eaa86, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 5287634390556870174, guid: cdbf5b26a7232454bb2e9aa4258eaa86, type: 3}
       propertyPath: m_LocalRotation.w
@@ -137,16 +137,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 3018402151759073896}
     m_Modifications:
     - target: {fileID: 4933377186556888686, guid: baf705bad90360946b99bff54b084631, type: 3}
+      propertyPath: _yPos
+      value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933377186556888686, guid: baf705bad90360946b99bff54b084631, type: 3}
       propertyPath: _target
       value: 
       objectReference: {fileID: 919731766670582443}
     - target: {fileID: 4933377186556888686, guid: baf705bad90360946b99bff54b084631, type: 3}
       propertyPath: _snowWorldHeightMax
-      value: 32
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4933377186556888686, guid: baf705bad90360946b99bff54b084631, type: 3}
       propertyPath: _snowWorldHeightMin
-      value: 0
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 5310516259006340239, guid: baf705bad90360946b99bff54b084631, type: 3}
       propertyPath: orthographic size
