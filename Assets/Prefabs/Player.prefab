@@ -93,7 +93,7 @@ MonoBehaviour:
   _terminalVelocity: -10
   _jumpVelocity: 3
   _gravity: -6
-  _playerCanvas: {fileID: 6541699386784505472}
+  _optionsMenu: {fileID: 5918325912517944484}
 --- !u!143 &5880653601542522976
 CharacterController:
   m_ObjectHideFlags: 0
@@ -738,8 +738,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
---- !u!223 &6541699386784505472 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 8219418475895402300, guid: a0b3d67a9df8a4026a3cdc027517fa37, type: 3}
+--- !u!114 &5918325912517944484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8861935555705197848, guid: a0b3d67a9df8a4026a3cdc027517fa37, type: 3}
   m_PrefabInstance: {fileID: 2943653627965305276}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ca85d53d084253911867a95b173c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Logbound.Gameplay.UI.OptionsMenu

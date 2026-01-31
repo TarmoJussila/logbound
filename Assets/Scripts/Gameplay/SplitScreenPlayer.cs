@@ -1,4 +1,4 @@
-using System;
+using Logbound.Gameplay.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +33,7 @@ namespace Logbound.Gameplay
         [SerializeField] private float _jumpVelocity;
         [SerializeField] private float _gravity;
 
-        [SerializeField] private Canvas _playerCanvas;
+        [SerializeField] private OptionsMenu _optionsMenu;
 
         private Vector2 _moveInput;
         private Vector2 _lookInput;
@@ -166,6 +166,11 @@ namespace Logbound.Gameplay
                 _lookInput.x *= _mouseSensitivity;
                 _lookInput.y *= _mouseSensitivity;
             }
+
+            if (_optionsMenu.InvertVerticalLook)
+            {
+                _lookInput.y = -_lookInput.y;
+            }
         }
 
         private void OnJump(InputValue value)
@@ -208,7 +213,7 @@ namespace Logbound.Gameplay
                 }
             }
 
-            if (_playerCanvas.gameObject.activeSelf)
+            if (_optionsMenu.gameObject.activeSelf)
             {
                 ClosePauseMenu();
                 _pauseMenuLockIndex = -1;
@@ -223,13 +228,13 @@ namespace Logbound.Gameplay
         private void OpenPauseMenu()
         {
             
-            _playerCanvas.gameObject.SetActive(true);
+            _optionsMenu.gameObject.SetActive(true);
             _playerInput.SwitchCurrentActionMap("UI");
         }
 
         private void ClosePauseMenu()
         {
-            _playerCanvas.gameObject.SetActive(false);
+            _optionsMenu.gameObject.SetActive(false);
             _playerInput.SwitchCurrentActionMap("Player");
         }
     }
