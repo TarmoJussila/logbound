@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b4bfe52cd4c124fa4257a2ce054efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Logbound.Services.ForecastService
-  _forecastIntervalDuration: 15
+  _forecastIntervalDuration: 30
 --- !u!114 &2264210155607370765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,5 +73,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Logbound.Gameplay.WeatherTransitionController
   _targetWeatherState: 0
   _targetTemperature: 0
-  _weatherTransitionDuration: 5
-  _temperatureTransitionDuration: 10
+  _weatherTransitionDuration: 10
+  _temperatureTransitionDuration: 20

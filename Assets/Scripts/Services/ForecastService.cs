@@ -21,9 +21,8 @@ namespace Logbound.Services
         
         private float _forecastTimer;
 
-        protected override void Awake()
+        protected void Start()
         {
-            base.Awake();
             InitializeForecast
             (
                 WeatherUtility.GetRandomWeatherState(),
@@ -55,6 +54,8 @@ namespace Logbound.Services
             _previousTargetTemperature = previousTemperature;
             _currentTargetTemperature = currentTemperature;
             _nextTargetTemperature = nextTemperature;
+            
+            OnForecastUpdated?.Invoke(_currentTargetState, _currentTargetTemperature);
         }
         
         private void UpdateForecast(WeatherState nextState, float nextTemperature)
