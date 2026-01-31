@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class PlayerAnimator : MonoBehaviour
     {

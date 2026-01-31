@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Logbound.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class PlayerCameraLayerHelper : MonoBehaviour
     {

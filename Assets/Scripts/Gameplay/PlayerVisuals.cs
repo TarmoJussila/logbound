@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class PlayerVisuals : MonoBehaviour
     {

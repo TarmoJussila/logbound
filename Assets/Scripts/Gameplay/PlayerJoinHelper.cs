@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class PlayerJoinHelper : MonoBehaviour
     {

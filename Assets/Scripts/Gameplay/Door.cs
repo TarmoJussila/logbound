@@ -1,8 +1,6 @@
-using System;
-using Logbound.Gameplay;
 using UnityEngine;
 
-namespace Logbound
+namespace Logbound.Gameplay
 {
     public class Door : InteractableItem
     {
