@@ -214,13 +214,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3018402151759073896}
     m_Modifications:
+    - target: {fileID: 365683227682226971, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7820783267935538372, guid: 151390ca92d42fe478ea5a06a944c60d, type: 3}
     - target: {fileID: 1394148136651017410, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1394148136651017410, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
       propertyPath: m_LocalScale.z
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1394148136651017410, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
       propertyPath: m_LocalPosition.x
@@ -262,6 +266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6188562135304390692, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7820783267935538372, guid: 151390ca92d42fe478ea5a06a944c60d, type: 3}
     - target: {fileID: 8657494091146718245, guid: 2a07c68e75c0ff54eb3ea03f46176271, type: 3}
       propertyPath: m_Name
       value: SnowPlane
