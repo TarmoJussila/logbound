@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Globalization;
 using Logbound.Gameplay;
 using TMPro;
 using UnityEngine;
@@ -47,12 +48,12 @@ namespace Logbound.UI
 
         private void Update()
         {
-            if (Player.CrouchHoldTimeRemaining is < double.MaxValue and > 0.1f)
+            var time = Player.CrouchHoldTimeRemaining;
+            if (time < double.MaxValue)
             {
                 _holdToQuitText.gameObject.SetActive(true);
-                _holdToQuitText.text = $"HOLD TO QUIT: {Player.CrouchHoldTimeRemaining:F2}s";
-
-                if (Player.CrouchHoldTimeRemaining <= 0d)
+                _holdToQuitText.text = $"HOLD TO QUIT: {time.ToString("F2", CultureInfo.InvariantCulture)}s";
+                if (time <= double.Epsilon)
                 {
                     SceneManager.LoadScene("MainMenuScene");
                 }
