@@ -1,7 +1,9 @@
+using System;
 using Logbound.Gameplay.UI;
 using Logbound.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Logbound.Gameplay
 {
@@ -38,6 +40,7 @@ namespace Logbound.Gameplay
 
         private Vector2 _moveInput;
         private Vector2 _lookInput;
+        private DateTime _crouchButtonLastPressed;
 
         public bool MouseInput => _playerInput.currentControlScheme.Equals("Keyboard&Mouse");
 
@@ -183,18 +186,22 @@ namespace Logbound.Gameplay
             }
         }
 
-        private void OnInteract(InputValue value)
+        private void OnCrouch(InputValue value)
         {
-            //Debug.Log("Interact");
-            if (value.isPressed)
+            if (value.Get<float>() >= 1f)
             {
-              //  _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+                _crouchButtonLastPressed = DateTime.UtcNow;
             }
-        }
-
-        private void OnAttack(InputValue value)
-        {
-            Debug.Log("Attack");
+            else
+            {
+                var held = (DateTime.UtcNow - _crouchButtonLastPressed).TotalSeconds;
+                Debug.Log($"Crouch was held for '{held}' seconds");
+                _crouchButtonLastPressed = DateTime.MaxValue;
+                if (held > 3f)
+                {
+                    SceneManager.LoadScene("MainMenuScene");
+                }
+            }
         }
 
         private void OnPause(InputValue value)

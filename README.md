@@ -21,16 +21,28 @@ The game was created with **Unity 6000.3.6f1**.
  3. Enjoy the game
 
 # Controls
-
+Keyboard & Mouse
 | Action        | Bind          |
 | ------------- |:-------------:|
-| Move Forward | W |
-| Move Backwards | S |
-| Move Left | A |
-| Move Right | D |
+| Move | WASD / Arrow keys |
+| Look | Mouse |
 | Jump | Space |
-| Pick Item / Interact | E |
-| Exit Game | ESC (hold) |
+| Pick Item | E |
+| Drop Item | Mouse 1 / Enter |
+| Options menu | ESC |
+| Quit to main menu | C (hold) |
+
+Gamepad
+| Action        | Bind          |
+| ------------- |:-------------:|
+| Move | Left stick |
+| Look | Right stick |
+| Jump | A |
+| Pick Item | X |
+| Drop Item | Y |
+| Options menu | Start |
+| Quit to main menu | B (hold) |
+
 
 # Credits - Team Too Many Hats
 
