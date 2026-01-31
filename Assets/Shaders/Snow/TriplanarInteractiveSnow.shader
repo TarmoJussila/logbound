@@ -22,7 +22,7 @@ Shader "Custom/Snow Interactive" {
 		[HDR]_PathColorOut("Snow Path Color Out", Color) = (0.5,0.5,0.7,1)
 		_PathBlending("Snow Path Blending", Range(0,3)) = 0.3
 		_MainTex("Snow Texture", 2D) = "white" {}
-		_SnowHeight("Snow Height", Range(0,2)) = 0.3
+		_SnowHeight("Snow Height", Range(0,15)) = 0.3
 		_SnowDepth("Snow Path Depth", Range(-2,2)) = 0.3
 		_SnowTextureOpacity("Snow Texture Opacity", Range(0,1)) = 0.3
 		_SnowTextureScale("Snow Texture Scale", Range(0,2)) = 0.3
@@ -34,6 +34,7 @@ Shader "Custom/Snow Interactive" {
 		_SparkleScale("Sparkle Scale", Range(0,10)) = 10
 		_SparkCutoff("Sparkle Cutoff", Range(0,2)) = 0.8
 		_SparkleNoise("Sparkle Noise", 2D) = "gray" {}
+		_SparkleTriplanarBlend("Sparkle triplanar blend", Range(0,1)) = 1
 
 		[Space]
 		[Header(Rim)]
@@ -98,6 +99,18 @@ Shader "Custom/Snow Interactive" {
 			float _SnowTextureOpacity, _SnowTextureScale;
 			float4 _ShadowColor;
 			float _SnowNormalStrength;
+			float _SparkleTriplanarBlend;
+
+			half4 triplanar(Varyings2 IN, sampler2D tex, float blend, float scale)
+			{
+				float3 uvTri = IN.worldPos * scale;
+				float3 triBlend = pow(abs(IN.normal), blend);
+				triBlend /= dot(triBlend, 1.0);
+				float4 x = tex2D(tex, uvTri.zy);
+				float4 y = tex2D(tex, uvTri.xz);
+				float4 z = tex2D(tex, uvTri.xy);
+				return x * triBlend.x + y * triBlend.y + z * triBlend.z;
+			}
 
 			half4 frag(Varyings2 IN) : SV_Target{
 
@@ -117,14 +130,18 @@ Shader "Custom/Snow Interactive" {
 				effect *=  smoothstep(0.99, 0.9, uv.y) * smoothstep(0.99, 0.9,1- uv.y);
 				
 				// worldspace Snow texture
-				float3 snowtexture = tex2D(_MainTex, IN.worldPos.xz * _SnowTextureScale).rgb;
+				//float3 snowtexture = tex2D(_MainTex, IN.worldPos.xz * _SnowTextureScale).rgb;
+				float4 snowtexture = triplanar(IN, _MainTex, 1, _SnowTextureScale);
 
 				// snow normal
-				float3 snownormal = UnpackNormal(tex2D(_Normal, IN.worldPos.xz * _NoiseScale)).rgb;
-			    snownormal = snownormal.r * IN.tangent + snownormal.g * IN.bitangent + snownormal.b * IN.normal;
-				
+				float3 snownormal = UnpackNormal(
+					tex2D(_Normal, IN.worldPos.xz * _NoiseScale)).rgb;
+				snownormal = snownormal.r * IN.tangent + snownormal.g * IN.
+					bitangent + snownormal.b * IN.normal;
+
+
 				//lerp between snow color and snow texture
-				float3 snowTex = lerp(_Color.rgb,snowtexture * _Color.rgb, _SnowTextureOpacity);
+				float3 snowTex = lerp(_Color.rgb, snowtexture * _Color.rgb, _SnowTextureOpacity);
 				
 				//lerp the colors using the RT effect path 
 				float3 path = lerp(_PathColorOut.rgb * IN.snowDepthT, _PathColorIn.rgb, saturate(IN.snowDepthT * _PathBlending));
@@ -153,9 +170,38 @@ Shader "Custom/Snow Interactive" {
 				float4 litMainColors = float4(mainColors,1) ;
 				extraLights *= litMainColors.rgb;
 				// add in the sparkles
-				float sparklesStatic = tex2D(_SparkleNoise, IN.worldPos.xz * _SparkleScale).r;
-				float cutoffSparkles = step(_SparkCutoff,sparklesStatic);				
-				litMainColors += lerp(cutoffSparkles * 4, 0,saturate(IN.snowDepthT * 2));
+
+				float4 sparkle = triplanar(IN, _SparkleNoise, _SparkleTriplanarBlend, _SparkleScale);
+				
+				//float sparklesStatic = tex2D(_SparkleNoise, IN.worldPos.xz * _SparkleScale).r;
+				//float cutoffSparkles = step(_SparkCutoff,sparklesStatic);
+
+				float3 refl = normalize(reflect(-mainLight.direction, snownormal));
+				//float3 toCam = normalize(GetCameraPositionWS() - IN.worldPos);
+				float3 toCam = normalize(GetWorldSpaceViewDir(IN.worldPos));
+
+				//return half4(refl,1);
+				//return half4(snownormal, 1);
+
+				float rDot = dot(refl, toCam);
+				//return half4(rDot, 0,0,1);
+
+				float nDot = dot(snownormal, -mainLight.direction);
+				//return half4(-nDot, 0,0,1);
+
+				float sparkleStr = saturate(rDot * -nDot);
+				//return half4(sparkleStr, 0,0,1);
+
+				float cutoffSparkles = step(_SparkCutoff, sparkle * step(0.01, sparkleStr));
+
+				cutoffSparkles *= saturate(
+					sign(dot(-mainLight.direction, float3(0, -1, 0))));
+				//cutoffSparkles *= saturate(sign(-nDot));
+
+				//return half4(cutoffSparkles, 0, 0, 1);
+
+				litMainColors += lerp(cutoffSparkles * 4, 0,
+				                      saturate(IN.snowDepthT * 2));
 				
 				// add rim light
 				half rim = 1.0 - dot(normalize(lerp(snownormal, IN.normal, _SnowNormalStrength)), normalize(IN.viewDir));

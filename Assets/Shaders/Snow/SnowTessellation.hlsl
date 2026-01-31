@@ -233,8 +233,8 @@ Varyings2 vert(Attributes2 input)
     float3 up = mul(unity_WorldToObject, float3(0, 1, 0));
 
     // move vertices up where snow is
-    input.vertex.xyz += SafeNormalize(up) * saturate(
-            (_SnowHeight) * (SnowNoise * _NoiseWeight)) *
+    input.vertex.xyz += SafeNormalize(up) * 
+            (_SnowHeight) * (SnowNoise * _NoiseWeight) *
         saturate(
             1 - (snowDepthT * _SnowDepth));
 
