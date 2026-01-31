@@ -1,5 +1,7 @@
+using System;
 using Logbound.Data;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Logbound.Utilities
 {
@@ -17,13 +19,13 @@ namespace Logbound.Utilities
         
         public static float GetRandomTemperatureCelsius()
         {
-            return UnityEngine.Random.Range(MinTemperatureCelsius, MaxTemperatureCelsius);
+            return Random.Range(MinTemperatureCelsius, MaxTemperatureCelsius);
         }
         
         public static WeatherState GetRandomWeatherState()
         {
-            var values = System.Enum.GetValues(typeof(WeatherState));
-            return (WeatherState)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+            var values = Enum.GetValues(typeof(WeatherState));
+            return (WeatherState)values.GetValue(Random.Range(0, values.Length));
         }
         
         public static float GetTemperature(float temperature, bool inCelsius = true)

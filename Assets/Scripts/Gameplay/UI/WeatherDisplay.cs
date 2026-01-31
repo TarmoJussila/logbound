@@ -1,6 +1,7 @@
 using Logbound.Data;
 using Logbound.Services;
 using Logbound.Utilities;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,8 @@ namespace Logbound.Gameplay.UI
     public class WeatherDisplay : MonoBehaviour
     {
         [SerializeField] private WeatherIconsData _weatherIconsData;
-        [SerializeField] private TMPro.TextMeshProUGUI _weatherStateText;
-        [SerializeField] private TMPro.TextMeshProUGUI _temperatureText;
+        [SerializeField] private TextMeshProUGUI _weatherStateText;
+        [SerializeField] private TextMeshProUGUI _temperatureText;
         [SerializeField] private Image _weatherIcon;
         [SerializeField] private WeatherUtility.WeatherTimeState _weatherTimeState;
         [SerializeField] private bool _displayInCelsius = true;

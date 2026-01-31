@@ -1,5 +1,6 @@
 using System.Collections;
 using Logbound.Gameplay;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ namespace Logbound
         private PlayerDamage _playerDamage;
         private PlayerMaskHelper _playerMaskHelper;
 
-        [SerializeField] private TMPro.TextMeshProUGUI _tooltipText;
+        [SerializeField] private TextMeshProUGUI _tooltipText;
 
         [SerializeField] private GameObject _aliveElements;
         [SerializeField] private GameObject _deadElements;

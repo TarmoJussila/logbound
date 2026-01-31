@@ -1,11 +1,12 @@
 using Logbound.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace Logbound.Gameplay.UI
 {
     public class TemperatureText : MonoBehaviour
     {
-        [SerializeField] private TMPro.TextMeshProUGUI _temperatureText;
+        [SerializeField] private TextMeshProUGUI _temperatureText;
         [SerializeField] private bool _displayInCelsius = true;
 
         private bool _isInitialized = false;

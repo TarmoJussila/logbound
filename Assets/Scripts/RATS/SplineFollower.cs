@@ -1,7 +1,6 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
-using Unity.Mathematics;
-using UnityEngine.Serialization;
 
 public class SplineFollower : MonoBehaviour
 {
