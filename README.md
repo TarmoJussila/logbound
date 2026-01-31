@@ -1,6 +1,6 @@
 # LOGBOUND
 
-**Logbound* is lorep ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Loremp ipsum. Lorem ipsum. Lorem ipsum.
+**Logbound** is a tense survival game set in a frozen wilderness where every decision can mean the difference between warmth and death.
 
 The game was created in 48 hours during the Global Game Jam / Finnish Game Jam 2026.
 
@@ -28,6 +28,14 @@ The game was created with **Unity 6000.3.6f1**.
 
 # Credits - Team Too Many Hats
 
-N/A - N/A
+Tarmo Jussila - Programming
 
-N/A - N/A
+Juho Turpeinen - Programming
+
+Kalle Collan - Programming
+
+Tuomo Oksanen - Programming
+
+Timo Koski - Visual Design
+
+Janet Vaher - Visual Design
