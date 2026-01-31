@@ -184,7 +184,11 @@ namespace Logbound.Gameplay
 
         private void OnInteract(InputValue value)
         {
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
+            if (value.isPressed)
+            {
+              //  _playerCanvas.gameObject.SetActive(!_playerCanvas.gameObject.activeSelf);
+            }
         }
 
         private void OnAttack(InputValue value)
