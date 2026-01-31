@@ -6,6 +6,8 @@ namespace Logbound.Utilities
     {
         private static T _instance;
         private static object _lock = new();
+        
+        private const bool DestroyOnLoad = true;
 
         public static T Instance
         {
@@ -35,7 +37,10 @@ namespace Logbound.Utilities
             if (_instance == null)
             {
                 _instance = this as T;
-                DontDestroyOnLoad(gameObject);
+                if (!DestroyOnLoad)
+                {
+                    DontDestroyOnLoad(gameObject);
+                }
             }
             else if (_instance != this)
             {
