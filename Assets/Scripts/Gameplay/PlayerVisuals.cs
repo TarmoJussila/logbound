@@ -41,6 +41,12 @@ namespace Logbound
             PlayerJoinHelper.OnPlayerRemoved -= CheckPlayers;
         }
 
+        private void Start()
+        {
+            SetAnimation(Anim.Walk);
+            CheckPlayers();
+        }
+
         private void CheckPlayers()
         {
             var inputs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
@@ -49,16 +55,12 @@ namespace Logbound
 
             PlayerInput self = GetComponentInParent<PlayerInput>();
 
-            _targetPlayerTransform = matchingInput.transform;
+            if (matchingInput != null)
+            {
+                _targetPlayerTransform = matchingInput.transform;
+            }
 
-            
-            
-            _rend.enabled = matchingInput != null;
-        }
-
-        private void Start()
-        {
-            SetAnimation(Anim.Walk);
+            _rend.enabled = matchingInput != null && matchingInput != self;
         }
 
         private void Update()

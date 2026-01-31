@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795865797086185970}
   - component: {fileID: 7552437992512028010}
+  - component: {fileID: 40784529430196626}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -76,3 +77,15 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &40784529430196626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630793150826829296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a4d52a73794434f85c06ec81972393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Logbound.PlayerJoinHelper
