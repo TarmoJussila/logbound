@@ -22,9 +22,15 @@ The game was created with **Unity 6000.3.6f1**.
 
 # Controls
 
-| Action           | Bind          |
-| ---------------- |:-------------:|
-| N/A              | N/A           |
+| Action        | Bind          |
+| ------------- |:-------------:|
+| Move Forward | W |
+| Move Backwards | S |
+| Move Left | A |
+| Move Right | D |
+| Jump | Space |
+| Pick Item / Interact | E |
+| Exit Game | ESC (hold) |
 
 # Credits - Team Too Many Hats
 
