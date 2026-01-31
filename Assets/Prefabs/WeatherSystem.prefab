@@ -89,5 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Logbound.Gameplay.LightingSettingsHandler
   _minFogDensity: 0.01
-  _maxFogDensity: 1
+  _maxFogDensity: 0.1
   _transitionSpeed: 1
