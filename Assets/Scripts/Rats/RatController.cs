@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Splines;
 
 namespace Logbound.Rats
@@ -7,24 +8,26 @@ namespace Logbound.Rats
     public class RatController : MonoBehaviour
     {
         [Header("Rat GameObjects with SplineFollower")]
-        [SerializeField] private List<SplineFollower> ratObjects = new List<SplineFollower>();
+        [FormerlySerializedAs("ratObjects")]
+        [SerializeField] private List<SplineFollower> _ratObjects = new List<SplineFollower>();
         [Header("Available Splines")]
-        [SerializeField] private List<SplineContainer> splines = new List<SplineContainer>();
+        [FormerlySerializedAs("splines")]
+        [SerializeField] private List<SplineContainer> _splines = new List<SplineContainer>();
 
-        void Start()
+        private void Start()
         {
             AssignRandomSplinesToRats();
         }
 
         public void AssignRandomSplinesToRats()
         {
-            if (splines.Count == 0)
+            if (_splines.Count == 0)
             {
                 Debug.LogWarning("No splines available to assign!");
                 return;
             }
 
-            foreach (SplineFollower ratObject in ratObjects)
+            foreach (SplineFollower ratObject in _ratObjects)
             {
                 if (ratObject == null) continue;
 
@@ -34,8 +37,8 @@ namespace Logbound.Rats
                     Debug.LogWarning($"GameObject {ratObject.name} does not have a SplineFollower component!");
                     continue;
                 }
-                int randomIndex = Random.Range(0, splines.Count);
-                follower.SplineContainer = splines[randomIndex];
+                int randomIndex = Random.Range(0, _splines.Count);
+                follower._splineContainer = _splines[randomIndex];
                 follower.Initialize();
             }
         }

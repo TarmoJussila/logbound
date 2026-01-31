@@ -1,53 +1,55 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Splines;
 
 namespace Logbound.Rats
 {
     public class SplineFollower : MonoBehaviour
     {
+        [FormerlySerializedAs("SplineContainer")]
         [Header("Settings")]
-        public SplineContainer SplineContainer;
-        public float Speed = 5f;
-        [SerializeField] private bool loop = true;
-        [SerializeField] private bool faceForward = true;
+        public SplineContainer _splineContainer;
+        [FormerlySerializedAs("Speed")]
+        public float _speed = 5f;
+        [FormerlySerializedAs("loop")]
+        [SerializeField] private bool _loop = true;
+        [FormerlySerializedAs("faceForward")]
+        [SerializeField] private bool _faceForward = true;
     
         private float _distancePercentage = 0f;
         private float _splineLength;
 
         public void Initialize()
         {
-            if (SplineContainer != null)
-                _splineLength = SplineContainer.CalculateLength();
+            if (_splineContainer != null)
+            {
+                _splineLength = _splineContainer.CalculateLength();
+            }
         }
 
-        void Update()
+        private void Update()
         {
-            if (SplineContainer == null || _splineLength <= 0) return;
-
-            // Calculate progress
-            _distancePercentage += (Speed * Time.deltaTime) / _splineLength;
-
-            // Handle Looping logic
-            if (loop)
+            if (_splineContainer == null || _splineLength <= 0) return;
+            
+            _distancePercentage += (_speed * Time.deltaTime) / _splineLength;
+            
+            if (_loop)
             {
-                // The % 1f keeps the value between 0 and 1
                 _distancePercentage %= 1f; 
             }
             else
             {
                 _distancePercentage = Mathf.Clamp01(_distancePercentage);
-                if (_distancePercentage >= 1f) return; // Stop at the end
+                if (_distancePercentage >= 1f) return;
             }
-
-            // Apply Position
-            transform.position = (Vector3)SplineContainer.EvaluatePosition(_distancePercentage);
-
-            // Apply Rotation
-            if (faceForward)
+            
+            transform.position = (Vector3)_splineContainer.EvaluatePosition(_distancePercentage);
+            
+            if (_faceForward)
             {
-                float3 forward = SplineContainer.EvaluateTangent(_distancePercentage);
-                float3 up = SplineContainer.EvaluateUpVector(_distancePercentage);
+                float3 forward = _splineContainer.EvaluateTangent(_distancePercentage);
+                float3 up = _splineContainer.EvaluateUpVector(_distancePercentage);
             
                 if (!forward.Equals(float3.zero))
                 {
