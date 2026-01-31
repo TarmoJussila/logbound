@@ -47,7 +47,7 @@ namespace Logbound.UI
 
         private void Update()
         {
-            if (Player.CrouchHoldTimeRemaining < double.MaxValue)
+            if (Player.CrouchHoldTimeRemaining is < double.MaxValue and > 0.1f)
             {
                 _holdToQuitText.gameObject.SetActive(true);
                 _holdToQuitText.text = $"HOLD TO QUIT: {Player.CrouchHoldTimeRemaining:F2}s";
